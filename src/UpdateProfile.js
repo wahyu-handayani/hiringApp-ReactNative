@@ -72,7 +72,7 @@ class UpdateProfile extends Component {
           console.log(response.data, 'wwwwwwwwwwwwwwwwwwwwwwwwwwww')
           // AsyncStorage.setItem('update','ok')
           this.props.navigation.navigate('Profile')
-          
+
 
 
         })
@@ -129,12 +129,26 @@ class UpdateProfile extends Component {
       //         <Right />
       //     </Header>
       <ImageBackground source={require("./bg.jpg")} style={{ width: '100%', height: '100%' }}>
-        <SafeAreaView style={styles.container}>
+        <Drawer
+          ref={(ref) => { this._drawer = ref; }}
+          content={<SideBar navigation={this.props.navigation} />}
+          onClose={() => this.closeDrawer()} >
+          <Header style={{ marginBottom: 20 }}>
+            <Left>
+              <Button transparent onPress={() => this.openDrawer()}>
+                <Icon name='menu' />
+              </Button>
+            </Left>
+            <Body>
+              <Title>Fill The Data</Title>
+            </Body>
+            <Right />
+          </Header>
+
+          {/* <SafeAreaView style={styles.container}> */}
           <ScrollView style={styles.scrollView}>
             <View>
-              <Text style={styles.labeluser}>
-                Fill The Data
-            </Text>
+
 
               <Item regular style={styles.inputuser}>
                 <Input
@@ -147,7 +161,7 @@ class UpdateProfile extends Component {
               </Item>
             </View>
             <View>
-              <Text style={styles.labeluser}></Text>
+              {/* <Text style={styles.labeluser}></Text> */}
               <Item regular style={styles.inputuser}>
                 <Input
                   autoCapitalize="none"
@@ -159,7 +173,7 @@ class UpdateProfile extends Component {
               </Item>
             </View>
             <View>
-              <Text style={styles.labeluser}></Text>
+              {/* <Text style={styles.labeluser}></Text> */}
               <Item regular style={styles.inputuser}>
                 <Input
                   autoCapitalize="none"
@@ -171,7 +185,7 @@ class UpdateProfile extends Component {
               </Item>
             </View>
             <View>
-              <Text style={styles.labeluser}></Text>
+              {/* <Text style={styles.labeluser}></Text> */}
               <Item regular style={styles.inputuser}>
                 <Input
                   autoCapitalize="none"
@@ -183,7 +197,7 @@ class UpdateProfile extends Component {
               </Item>
             </View>
             <View>
-              <Text style={styles.labeluser}></Text>
+              {/* <Text style={styles.labeluser}></Text> */}
               <Item regular style={styles.inputuser}>
                 <Input
                   autoCapitalize="none"
@@ -195,7 +209,7 @@ class UpdateProfile extends Component {
               </Item>
             </View>
             <View>
-              <Text style={styles.labeluser}></Text>
+              {/* <Text style={styles.labeluser}></Text> */}
               <Item regular style={styles.inputuser}>
                 <Input
                   autoCapitalize="none"
@@ -207,7 +221,7 @@ class UpdateProfile extends Component {
               </Item>
             </View>
             <View>
-              <Text style={styles.labeluser}></Text>
+              {/* <Text style={styles.labeluser}></Text> */}
               <Item regular style={styles.inputuser}>
                 <Input
                   autoCapitalize="none"
@@ -219,7 +233,7 @@ class UpdateProfile extends Component {
               </Item>
             </View>
             <View>
-              <Text style={styles.labeluser}></Text>
+              {/* <Text style={styles.labeluser}></Text> */}
               <Item regular style={styles.inputuser}>
                 <Input
                   autoCapitalize="none"
@@ -230,18 +244,18 @@ class UpdateProfile extends Component {
                 />
               </Item>
               <Button onPress={() => {
-                  this.submit()
-                }} style={styles.btnsignin} block>
-                  <Text style={styles.labelbtn}>
-                    SAVE
+                this.submit()
+              }} style={styles.btnsignin} block>
+                <Text style={styles.labelbtn}>
+                  SAVE
             </Text>
               </Button>
             </View>
           </ScrollView>
-        </SafeAreaView>
+          {/* </SafeAreaView> */}
+        </Drawer>
       </ImageBackground>
-      // </Container>
-      //     </Drawer>
+
     )
   }
 }
@@ -274,6 +288,7 @@ const styles = StyleSheet.create({
     height: 50,
     borderColor: "white",
     backgroundColor: "transparent",
+    marginBottom: 15,
     borderRadius: 8,
     marginLeft: 14,
   },
@@ -281,7 +296,8 @@ const styles = StyleSheet.create({
     width: 335,
     height: 40,
     marginLeft: 14,
-    marginTop: 30,
+    marginTop: 15,
+    marginBottom: 30,
     backgroundColor: "midnightblue"
   },
   labelbtn: {
