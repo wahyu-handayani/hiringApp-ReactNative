@@ -17,7 +17,7 @@ import SideBar from './Sidebar';
 import { Drawer, Container, Item, Input, Button, Header, Left, Icon, Body, Title, Right, Content, Card, CardItem } from 'native-base'
 import AsyncStorage from '@react-native-community/async-storage';
 import axios from 'axios'
-// import PTRView from 'react-native-pull-to-refresh';
+
 
 export default class Profile extends Component {
   state = {
@@ -32,13 +32,6 @@ export default class Profile extends Component {
   openDrawer() {
     this._drawer._root.open()
   };
-
-  // refresh() {
-  //   return new Promise((resolve) => {
-  //     setTimeout(() => { resolve() }, 2000)
-  //   });
-  // }
-
 
 
   onRefresh = async () => {
@@ -107,24 +100,6 @@ export default class Profile extends Component {
             <Right />
           </Header>
 
-          {/* <View>
-                <TouchableOpacity onPress={() => this.props.navigation.navigate('Profile')}>
-                <Text> Diisi Profil</Text>
-                </TouchableOpacity>
-            </View> */}
-
-          {/* <Content padder> */}
-          {/* <Card>
-                    <CardItem header>
-                        <Text>PROFILKU ADALAH:...</Text>
-                    </CardItem>
-                    <CardItem>
-                        <Body>
-                            <Text>PROFIL</Text>
-                            
-                        </Body>
-                    </CardItem>
-                </Card> */}
           <ImageBackground source={require("./bgp.jpg")} style={{ width: '100%', height: '100%' }}>
 
 
@@ -182,79 +157,11 @@ export default class Profile extends Component {
       </Drawer>
 
 
-
-
-
-
-
-
-
     )
   }
 }
 
 
-// https://medium.com/@iqbalkurniawan/membuat-drawer-pada-react-native-dengan-nativebase-a3420ae44a17
-// import React, { Component } from 'react';
-// import { View } from 'react-native';
-// import { Card, Drawer, CardItem, Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text } from 'native-base';
-// import SideBar from '../SideBar/Sidebar';
-// export default class Profile extends Component {
-
-//     closeDrawer() {
-//         this._drawer._root.close()
-//     };
-//     openDrawer() {
-//         this._drawer._root.open()
-//     };
-
-//     render() {
-//         return (
-//             <Drawer
-//                 ref={(ref) => { this._drawer = ref; }}
-//                 content={<SideBar navigator={this.navigator} />}
-//                 onClose={() => this.closeDrawer()} >
-//             <Container>
-//                 <Header>
-//                     <Left>
-//                         <Button transparent onPress={()=>this.openDrawer()}>
-//                             <Icon name='menu' />
-//                         </Button>
-//                     </Left>
-//                     <Body>
-//                         <Title>Tutorial Drawer</Title>
-//                     </Body>
-//                     <Right />
-//                 </Header>
-//                 <Content padder>
-//                     <Card>
-//                         <CardItem header>
-//                             <Text>Kumpulan Program Inkubator dan Akselerator Startup di Indonesia</Text>
-//                         </CardItem>
-//                         <CardItem>
-//                             <Body>
-//                                 <Text>
-//                                     Di samping investor, keberadaan program inkubasi dan akselerator merupakan faktor penggerak tumbuhnya ekosistem startup teknologi . Meski secara garis besar berbeda, kedua hal tersebut memiliki tujuan yang sama, yakni mempercepat perkembangan startup, terutama dari segi kesiapan model bisnis, penyempurnaan konsep produk, dan lain-lain.
-//                                 </Text>
-//                             </Body>
-//                         </CardItem>
-//                         <CardItem footer>
-//                             <Text>Tech in Asia</Text>
-//                         </CardItem>
-//                     </Card>
-//                 </Content>
-//                 <Footer>
-//                     <FooterTab>
-//                         <Button full>
-//                             <Text>Footer</Text>
-//                         </Button>
-//                     </FooterTab>
-//                 </Footer>
-//             </Container>
-//             </Drawer>
-//         );
-//     }
-// }
 const styles = StyleSheet.create({
   mainbody: {
     marginTop: 30,
