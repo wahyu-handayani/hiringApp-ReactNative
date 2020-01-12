@@ -7,18 +7,23 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
-  ImageBackground
+  ImageBackground,
+  FlatList,
+  ActivityIndicator,
+  RefreshControl
 } from 'react-native'
 
 import SideBar from './Sidebar';
 import { Drawer, Container, Item, Input, Button, Header, Left, Icon, Body, Title, Right, Content, Card, CardItem } from 'native-base'
 import AsyncStorage from '@react-native-community/async-storage';
 import axios from 'axios'
-import PTRView from 'react-native-pull-to-refresh';
+// import PTRView from 'react-native-pull-to-refresh';
 
 export default class Profile extends Component {
   state = {
     users: [],
+    loading: false, // user list loading
+    isRefreshing: false, //for pull to refresh
     errors: null
   };
   closeDrawer() {
@@ -36,8 +41,12 @@ export default class Profile extends Component {
 
 
 
+  onRefresh = async () => {
 
-  async componentDidMount() {
+
+
+    this.setState({ isRefreshing: true });
+
 
     const token = await AsyncStorage.getItem('usertoken')
     const email = await AsyncStorage.getItem('email')
@@ -61,7 +70,8 @@ export default class Profile extends Component {
       .then(response => {
         console.log('dataaaaaaaaaaaaaaa', response)
         this.setState({
-          users: response.data.response,
+          isRefreshing: false,
+          users: response.data.response
         });
 
         console.log(response.data.response, 'lssssssssssssssssssssssssssssssss')
@@ -69,12 +79,15 @@ export default class Profile extends Component {
         AsyncStorage.setItem('id', JSON.stringify(response.data.response[0].id))
 
       })
-      .catch(error => this.setState({ error }));
+      .catch(error => this.setState({
+        isRefreshing: false,
+        error
+      }));
     // const cobaa = await AsyncStorage.getItem('id')
     // console.log(cobaa,'oouuuuuuuuuo')
   }
   render() {
-    const { users } = this.state
+    // const { users } = this.state
 
     return (
       <Drawer
@@ -114,41 +127,52 @@ export default class Profile extends Component {
                 </Card> */}
           <ImageBackground source={require("./bgp.jpg")} style={{ width: '100%', height: '100%' }}>
 
-            {users.map(user =>
-              <View key={user.id} style={styles.mainbody}>
-                {/* <PTRView onRefresh={this.refresh} >
-                  <View >
-                    <Text >
-                      Let's Pull! 
-                    </Text>
-                  </View>
-                </PTRView> */}
-                <Image style={styles.imgprofile} source={require("./pr.jpg")} />
-                <Text style={styles.name}>{user.name}</Text>
-                <Text style={styles.email}>{user.email}</Text>
-                <View style={styles.itemprofile}>
-                  <Image style={styles.imgitem} source={require("./star.png")} />
-                  <Text style={styles.labelitem}>{user.skill}</Text>
-                  <Text style={styles.sublabelitem}>Skill</Text>
-                </View>
-                <View style={styles.itemprofile}>
-                  <Image style={styles.imgitem} source={require("./star.png")} />
-                  <Text style={styles.labelitem}>{user.showcase}</Text>
-                  <Text style={styles.sublabelitem}>Showcase</Text>
-                </View>
-                <View style={styles.itemprofile}>
-                  <Image style={styles.imgitem} source={require("./star.png")} />
-                  <Text style={styles.labelitem}>{user.location}</Text>
-                  <Text style={styles.sublabelitem}>Location</Text>
-                </View>
-                <View style={styles.itemprofile}>
-                  <Image style={styles.imgitem} source={require("./star.png")} />
-                  <Text style={styles.labelitem}>{user.description}</Text>
-                  <Text style={styles.sublabelitem}>Description</Text>
-                </View>
-              </View>
 
-            )}
+            <FlatList
+              data={this.state.users}
+              showsVerticalScrollIndicator={false}
+              refreshControl={
+                <RefreshControl
+                  refreshing={this.state.isRefreshing}
+                  onRefresh={this.onRefresh.bind(this)}
+                />
+              }
+              renderItem={({ item }) =>
+                <View style={styles.flatview}>
+                  <Image style={styles.imgprofile} source={require("./pr.jpg")} />
+                  <Text style={styles.name}>{item.name}</Text>
+                  <Text style={styles.email}>{item.email}</Text>
+                  <View style={styles.itemprofile}>
+                    <Image style={styles.imgitem} source={require("./star.png")} />
+                    <Text style={styles.labelitem}>{item.skill}</Text>
+                    <Text style={styles.sublabelitem}>Skill</Text>
+                  </View>
+                  <View style={styles.itemprofile}>
+                    <Image style={styles.imgitem} source={require("./star.png")} />
+                    <Text style={styles.labelitem}>{item.showcase}</Text>
+                    <Text style={styles.sublabelitem}>Showcase</Text>
+                  </View>
+                  <View style={styles.itemprofile}>
+                    <Image style={styles.imgitem} source={require("./star.png")} />
+                    <Text style={styles.labelitem}>{item.location}</Text>
+                    <Text style={styles.sublabelitem}>Location</Text>
+                  </View>
+                  <View style={styles.itemprofile}>
+                    <Image style={styles.imgitem} source={require("./star.png")} />
+                    <Text style={styles.labelitem}>{item.description}</Text>
+                    <Text style={styles.sublabelitem}>Description</Text>
+                  </View>
+
+                  {/* <Text >{item.name}</Text>
+            <Text >{item.email}</Text> */}
+                </View>
+              }
+              keyExtractor={item => item.email}
+            />
+
+
+
+
 
           </ImageBackground>
 
