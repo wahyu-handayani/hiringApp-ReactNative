@@ -68,9 +68,21 @@ export default class EngineerCard extends Component {
                         </Button>
                     </Left>
                     <Body>
-                        <Title>Engineer Profile</Title>
+                        <Title>Engineer Data</Title>
                     </Body>
                     <Right />
+                    <Right>
+                        <Button transparent onPress={async () => {
+                            await AsyncStorage.removeItem('email')
+                            await AsyncStorage.removeItem('usertoken')
+                            await AsyncStorage.removeItem('emailEng')
+                            await AsyncStorage.removeItem('position')
+                            this.props.navigation.navigate('Login')
+                        }}>
+                            <Icon name='home' />
+                        </Button>
+                    </Right>
+                    <Left />
                 </Header>
 
                 <ImageBackground source={require("./bgp.jpg")} style={{ width: '100%', height: '100%' }}>
