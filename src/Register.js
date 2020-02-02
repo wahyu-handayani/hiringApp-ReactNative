@@ -54,7 +54,7 @@ export default class Register extends React.Component {
     console.log('909090', data)
 
     axios
-    .post('http://192.168.100.6:8000/regis', data)
+    .post('http://192.168.6.195:8000/regis', data)
     .then(response => {
       Alert.alert('ALHAMDULILLAH')
       this.props.navigation.navigate('Login')

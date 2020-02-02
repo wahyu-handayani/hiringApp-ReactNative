@@ -60,7 +60,7 @@ class Login extends Component {
     console.log('909090', data)
 
     axios
-      .post('http:/192.168.100.6:8000/loginUser', data)
+      .post('http:/192.168.6.195:8000/loginUser', data)
       .then(response => {
         console.log(JSON.parse(response.config.data).email, 'cobaaaaaaaaaaa')
         AsyncStorage.setItem('usertoken', response.data.token)

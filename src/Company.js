@@ -66,7 +66,7 @@ export default class Company extends Component {
             }
 
             axios
-                .get(`http://192.168.100.6:8000/sort?search=${this.state.search}&sortby=${this.state.sortby}&limit=${this.state.limit}&page=${this.state.page}&order=${this.state.order}`, config)
+                .get(`http://192.168.6.195:8000/sort?search=${this.state.search}&sortby=${this.state.sortby}&limit=${this.state.limit}&page=${this.state.page}&order=${this.state.order}`, config)
                 .then(response => {
                     console.log('ooook')
                     console.log(response)
@@ -94,7 +94,7 @@ export default class Company extends Component {
         }
 
         axios
-            .get(`http://192.168.100.6:8000/sort`, config)
+            .get(`http://192.168.6.195:8000/sort`, config)
             .then(response => {
                 console.log('ooook')
                 console.log(response)
@@ -122,6 +122,9 @@ export default class Company extends Component {
                         <Button transparent>
                             {/* <Button transparent onPress={() => this.openDrawer()}> */}
                             <Icon name='menu' />
+                            <Body>
+                                <Title>Pusat Bantuan</Title>
+                            </Body>
                         </Button>
                     </Left>
                     <Right />

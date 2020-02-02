@@ -55,7 +55,7 @@ class UpdateProfile extends Component {
     // const myId = await AsyncStorage.getItem('id')
     if (myId !== null) {
       axios
-        .put(`http://192.168.100.6:8000/engineer/${myemail}`, {
+        .put(`http://192.168.6.195:8000/engineer/${myemail}`, {
           id: this.state.id,
           name: this.state.name,
           description: this.state.description,
@@ -69,7 +69,7 @@ class UpdateProfile extends Component {
 
           // localStorage.setItem('usertoken', response.data.token)
           // console.log(response.data)
-          console.log(response.data, 'wwwwwwwwwwwwwwwwwwwwwwwwwwww')
+          console.log(response.data, 'wwwwwwwwwwwwwwwwwwwwwwwwwwww') 
           // AsyncStorage.setItem('update','ok')
           this.props.navigation.navigate('Profile')
 
@@ -83,7 +83,7 @@ class UpdateProfile extends Component {
 
     } else {
       axios
-        .post('http://192.168.100.6:8000/engineer', {
+        .post('http://192.168.6.195:8000/engineer', {
           id: this.state.id,
           name: this.state.name,
           description: this.state.description,

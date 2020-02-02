@@ -38,7 +38,7 @@ export default class EngineerCard extends Component {
             }
         }
         axios
-            .get(`http://192.168.100.6:8000/engineer/${emailEng}`, config)
+            .get(`http://192.168.6.195:8000/engineer/${emailEng}`, config)
             .then(response => {
                 console.log('dataaaaaaaaaaaaaaa', response)
                 this.setState({
