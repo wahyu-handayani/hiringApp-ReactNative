@@ -59,7 +59,7 @@ export default class Profile extends Component {
       }
     }
     axios
-      .get(`http://192.168.6.195:8000/engineer/${email}`, config)
+      .get(`http://192.168.43.132:8000/engineer/${email}`, config)
       .then(response => {
         console.log('dataaaaaaaaaaaaaaa', response)
         this.setState({

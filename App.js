@@ -19,6 +19,7 @@ import Profile from './src/Profile';
 import UpdateProfile from './src/UpdateProfile';
 import Company from './src/Company';
 import EngineerCard from './src/EngineerCard';
+import Project from './src/Project'
 
 /**
  * createStackNavigator
@@ -43,6 +44,9 @@ const Navigator = createStackNavigator({
         headerShown: false
     }},
     EngineerCard: { screen: EngineerCard,navigationOptions:{
+        headerShown: false
+    }},
+    Project: { screen: Project,navigationOptions:{
         headerShown: false
     }}
 });

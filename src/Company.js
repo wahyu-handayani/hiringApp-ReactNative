@@ -94,7 +94,7 @@ export default class Company extends Component {
         }
 
         axios
-            .get(`http://192.168.6.195:8000/sort`, config)
+            .get(`http://192.168.43.132:8000/sort`, config)
             .then(response => {
                 console.log('ooook')
                 console.log(response)
@@ -209,6 +209,9 @@ export default class Company extends Component {
                         />
                     </Item>
                 </View>
+                <Button onPress={()=>{this.props.navigation.navigate('Project')}} regular style={{width: 332,height: 35,borderColor: "white",backgroundColor: "cadetblue",borderRadius: 8,marginLeft: 14,marginTop: 5}}>
+                    <Text style={{marginLeft:125,color:'white'}}>Add Project</Text>
+                </Button>
                 <ScrollView>
                     <View style={styles.container}>
                         {users.map(user => {
