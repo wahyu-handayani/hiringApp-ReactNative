@@ -39,7 +39,7 @@ export default class Project extends Component {
             }
         }
         axios
-            .post('http://192.168.6.195:8000/companyproject', {
+            .post('http://192.168.43.132:8000/companyproject', {
                 id_project: this.state.id_project,
                 project_name: this.state.project_name,
                 description: this.state.description,

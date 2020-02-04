@@ -20,6 +20,7 @@ import UpdateProfile from './src/UpdateProfile';
 import Company from './src/Company';
 import EngineerCard from './src/EngineerCard';
 import Project from './src/Project'
+import ListProject from './src/ListProject'
 
 /**
  * createStackNavigator
@@ -47,6 +48,9 @@ const Navigator = createStackNavigator({
         headerShown: false
     }},
     Project: { screen: Project,navigationOptions:{
+        headerShown: false
+    }},
+    ListProject: { screen: ListProject,navigationOptions:{
         headerShown: false
     }}
 });

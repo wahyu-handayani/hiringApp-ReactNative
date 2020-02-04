@@ -113,7 +113,7 @@ export default class Company extends Component {
             <SafeAreaView style={styles.safeAreaView}>
                 <Header style={{ backgroundColor: 'lightslategrey' }}>
                     <Left>
-                        <Button transparent>
+                        <Button transparent onPress={()=>this.props.navigation.navigate('ListProject')}>
                             <Icon name='menu' />
                         </Button>
                     </Left>
