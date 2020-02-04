@@ -1,12 +1,13 @@
 
 
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, SafeAreaView, ScrollView, Image, Picker, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, ScrollView, Image, Picker, TouchableOpacity,FlatList } from 'react-native';
 import CardView from 'react-native-cardview';
 import axios from 'axios'
 import { Container, Content, Card, CardItem, Thumbnail, Button, Icon, Left, Body, Right, Header, Title, Item, Input } from 'native-base';
 import AsyncStorage from '@react-native-community/async-storage';
-import ModalDropdown from 'react-native-modal-dropdown';
+import ActionButton from 'react-native-action-button';
+import Icons from 'react-native-vector-icons/Ionicons';
 
 export default class Company extends Component {
     constructor() {
@@ -66,7 +67,7 @@ export default class Company extends Component {
             }
 
             axios
-                .get(`http://192.168.6.195:8000/sort?search=${this.state.search}&sortby=${this.state.sortby}&limit=${this.state.limit}&page=${this.state.page}&order=${this.state.order}`, config)
+                .get(`http://192.168.43.132:8000/sort?search=${this.state.search}&sortby=${this.state.sortby}&limit=${this.state.limit}&page=${this.state.page}&order=${this.state.order}`, config)
                 .then(response => {
                     console.log('ooook')
                     console.log(response)
@@ -107,27 +108,18 @@ export default class Company extends Component {
     }
 
     render() {
-        const { users } = this.state
+        // const { users } = this.state
         return (
             <SafeAreaView style={styles.safeAreaView}>
-                {/* <Header
-                    placement="left"
-                    leftComponent={{ icon: 'menu', color: '#fff' }}
-                    centerComponent={{ text: 'MY TITLE', style: { color: '#fff' } }}
-                    rightComponent={{ icon: 'home', color: '#fff' }}
-                /> */}
-
-                <Header>
+                <Header style={{ backgroundColor: 'lightslategrey' }}>
                     <Left>
                         <Button transparent>
-                            {/* <Button transparent onPress={() => this.openDrawer()}> */}
                             <Icon name='menu' />
-                            <Body>
-                                <Title>Pusat Bantuan</Title>
-                            </Body>
                         </Button>
                     </Left>
-                    <Right />
+                    <Body>
+                        <Title>Home</Title>
+                    </Body>
                     <Right>
                         <Button transparent onPress={async () => {
                             await AsyncStorage.removeItem('email')
@@ -135,15 +127,10 @@ export default class Company extends Component {
                             await AsyncStorage.removeItem('position')
                             this.props.navigation.navigate('Login')
                         }}>
-                            <Icon name='home' />
+                            <Icon name='close' />
                         </Button>
                     </Right>
-                    <Left />
                 </Header>
-
-
-
-
                 <Item regular style={styles.inputuser}>
                     <Input
                         autoCapitalize="none"
@@ -153,15 +140,9 @@ export default class Company extends Component {
                         onChangeText={val => this.onSearch('search', val)}
                     />
                 </Item>
-                <View flexDirection="row">
+                {/* <View flexDirection="row">
                     <Item regular style={styles.inputuser21}>
-                        {/* <Input
-                            autoCapitalize="none"
-                            placeholder='Sort by...'
-                            placeholderTextColor="white"
-                            style={{ color: "white" }}
-                            onChangeText={val => this.onSortby('sortby', val)}
-                        /> */}
+
                         <Picker
                             selectedValue={this.state.sortby}
                             style={{ height: 50, width: 170, color: "white" }}
@@ -173,13 +154,7 @@ export default class Company extends Component {
                         </Picker>
                     </Item>
                     <Item regular style={styles.inputuser22}>
-                        {/* <Input
-                            autoCapitalize="none"
-                            placeholder='Order' 
-                            placeholderTextColor="white"
-                            style={{ color: "white" }}
-                            onChangeText={val => this.onOrder('order', val)}
-                        /> */}
+
                         <Picker
                             selectedValue={this.state.order}
                             style={{ height: 50, width: 170, color: "white" }}
@@ -188,8 +163,8 @@ export default class Company extends Component {
                             <Picker.Item label="DESC" value="DESC" />
                         </Picker>
                     </Item>
-                </View>
-                <View flexDirection="row" style={{ marginBottom: 8 }}>
+                </View> */}
+                {/* <View flexDirection="row" style={{ marginBottom: 8 }}>
                     <Item regular style={styles.inputuser21}>
                         <Input
                             autoCapitalize="none"
@@ -208,54 +183,61 @@ export default class Company extends Component {
                             onChangeText={val => this.onLimit('limit', val)}
                         />
                     </Item>
-                </View>
-                <Button onPress={()=>{this.props.navigation.navigate('Project')}} regular style={{width: 332,height: 35,borderColor: "white",backgroundColor: "cadetblue",borderRadius: 8,marginLeft: 14,marginTop: 5}}>
-                    <Text style={{marginLeft:125,color:'white'}}>Add Project</Text>
+                </View> */}
+                <Button onPress={() => { this.props.navigation.navigate('Project') }} regular style={{ width: 332, height: 35, borderColor: "white", backgroundColor: "#6698AD", borderRadius: 8, marginLeft: 14, marginTop: 8,marginBottom:10 }}>
+                    <Text style={{ marginLeft: 125, color: 'white', fontSize: 16 }}>Add Project</Text>
                 </Button>
-                <ScrollView>
-                    <View style={styles.container}>
-                        {users.map(user => {
-                            return (
-                                <View flexDirection="row" key={user.id}>
-                                    {/* <CardView
-                                        cardElevation={0}
-                                        cardMaxElevation={0}
-                                        cornerRadius={5}
-                                        style={styles.card}
-                                    >
-                                        <View>
-                                            <Text>{user.name}</Text>
-                                            <Text>{user.skill}</Text>
-                                            <Text>{user.showcase}</Text>
-                                        </View>
-                                    </CardView> */}
-                                    {/* submit = async () => { */}
-                                    <TouchableOpacity style={styles.btn} onPress={async () => {
-                                        await AsyncStorage.setItem('emailEng', user.email)
-                                        const emailEng = await AsyncStorage.getItem('emailEng')
-                                        console.log(emailEng, 'EMAAAAAAAAAAAAAAAAAAAL')
-                                        this.props.navigation.navigate('EngineerCard')
-                                    }}>
-                                        <Card >
-                                            <CardItem cardBody >
-                                                <Image source={require('./bunga.jpg')} style={styles.foto} />
+                <View style={{ flex: 1, backgroundColor: '#f3f3f3' }}>
+                    {/* Rest of the app comes ABOVE the action button component !*/}
 
-                                            </CardItem>
-                                            <CardItem>
-                                                <Body>
-                                                    <Text>{user.name}</Text>
-                                                    <Text>{user.skill}</Text>
-                                                    <Text>{user.showcase}</Text>
-                                                    <Text>{user.email}</Text>
-                                                </Body>
-                                            </CardItem>
-                                        </Card>
-                                    </TouchableOpacity>
-                                </View>
-                            )
-                        })}
-                    </View>
-                </ScrollView>
+                    <ScrollView>
+                        <View style={styles.container}>
+                            <FlatList
+                                data={this.state.users}
+                                showsVerticalScrollIndicator={false}
+                                numColumns={2}
+                                renderItem={({ item }) =>
+                                // style={{justifyContent:'space-between'}}
+                                    <View >
+                                        {console.log(item,'lll')}
+                                        <TouchableOpacity style={styles.btn} onPress={async () => {
+                                            await AsyncStorage.setItem('emailEng', item.email)
+                                            const emailEng = await AsyncStorage.getItem('emailEng')
+                                            console.log(emailEng, 'EMAAAAAAAAAAAAAAAAAAAL')
+                                            this.props.navigation.navigate('EngineerCard')
+                                        }}>
+                                            <Card style={{borderRadius:20,width:160}}>
+                                                <CardItem cardBody >
+                                                    <Image source={require('./profile.jpg')} style={{height: 170,width: 160,borderTopLeftRadius:20,borderTopRightRadius:20,borderWidth:5}} />
+                                                </CardItem>
+                                                <CardItem style={{borderRadius:50}}>
+                                                    <Body>
+                                                        <Text>Name: {item.name}</Text>
+                                                        <Text>Skill: {item.skill}</Text>
+                                                        <Text>Showcase: {item.showcase}</Text>
+                                                    </Body>
+                                                </CardItem>
+                                            </Card>
+                                        </TouchableOpacity>
+                                    </View>
+                                }
+                                keyExtractor={item => item.email}
+            />
+                        </View>
+
+                    </ScrollView>
+                    <ActionButton buttonColor="rgba(231,76,60,1)">
+                        <ActionButton.Item buttonColor='#9b59b6' title="Sort by name" onPress={() => { this.setState({ sortby: 'name' }) }}>
+                            <Icons name="ios-checkmark-circle-outline" style={styles.actionButtonIcon} />
+                        </ActionButton.Item>
+                        <ActionButton.Item buttonColor='#3498db' title="Skill" onPress={() => { this.setState({ sortby: 'skill' }) }}>
+                            <Icons name="ios-checkmark" style={styles.actionButtonIcon} />
+                        </ActionButton.Item>
+                        <ActionButton.Item buttonColor='#1abc9c' title="Date updated" >
+                            <Icons name="md-done-all" style={styles.actionButtonIcon} onPress={() => { this.setState({ sortby: 'updated' }) }} />
+                        </ActionButton.Item>
+                    </ActionButton>
+                </View>
             </SafeAreaView>
         );
     }
@@ -266,10 +248,6 @@ const styles = StyleSheet.create({
         flex: 1
     },
     container: {
-        flex: 1
-        // backgroundColor: '#EEEEEE',
-    },
-    container: {
         marginLeft: 15
     },
     card: {
@@ -278,7 +256,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignSelf: 'center',
         flex: 1,
-        margin: 10
+        margin: 5
     },
     text: {
         textAlign: 'center',
@@ -290,15 +268,11 @@ const styles = StyleSheet.create({
         color: '#333333',
         marginBottom: 5
     },
-    foto: {
-        height: 200,
-        width: 325
-    },
     inputuser: {
         width: 335,
         height: 35,
         borderColor: "white",
-        backgroundColor: "cadetblue",
+        backgroundColor: "#6698AD",
         borderRadius: 8,
         marginLeft: 12,
         marginTop: 5
@@ -321,5 +295,10 @@ const styles = StyleSheet.create({
         marginLeft: 5,
         marginRight: 12,
         marginTop: 5
-    }
+    },
+    actionButtonIcon: {
+        fontSize: 20,
+        height: 22,
+        color: 'white',
+    },
 });

@@ -31,7 +31,7 @@ export default class EngineerCard extends Component {
     _renderButton = (text, onPress) => (
         <TouchableOpacity onPress={onPress}>
             <View style={styles.button}>
-                <Text>{text}</Text>
+                <Text style={{fontSize:15,fontWeight:'bold',color:'blue'}}>{text}</Text>
             </View>
         </TouchableOpacity>
     );
@@ -136,19 +136,19 @@ export default class EngineerCard extends Component {
 
             return (
                 <Container>
-                    <Header>
+                    <Header style={{ backgroundColor: 'lightslategrey' }}>
                         <Left>
                             <Button transparent onPress={async () => {
                                 await AsyncStorage.removeItem('emailEng')
                                 this.props.navigation.navigate('Company')
                             }}>
-                                <Icon name='home' />
+                                <Icon name='ios-arrow-back' />
                             </Button>
                         </Left>
                         <Body>
                             <Title>Engineer Data</Title>
                         </Body>
-                        <Right />
+                        
                         <Right>
                             <Button transparent onPress={async () => {
                                 await AsyncStorage.removeItem('email')
@@ -157,89 +157,57 @@ export default class EngineerCard extends Component {
                                 await AsyncStorage.removeItem('position')
                                 this.props.navigation.navigate('Login')
                             }}>
-                                <Icon name='home' />
+                                <Icon name='close' />
                             </Button>
                         </Right>
-                        <Left />
                     </Header>
-
-                    <ImageBackground source={require("./bgp.jpg")} style={{ width: '100%', height: '100%' }}>
-                        {/* <TouchableOpacity onPress={this.showModal}>
-                        <Item regular style={{ width: 335, height: 50, borderColor: "white", backgroundColor: "cadetblue", borderRadius: 8, marginLeft: 12, marginTop: 5, marginBottom: 10 }}>
-                            <Text style={{ marginLeft: 150, fontSize: 18 }}>Hire</Text>
-                        </Item>
-                    </TouchableOpacity> */}
-
-
-
-
+                    
+                    <Container >
+                        
                         <ScrollView>
-                            <View style={styles.container}>
-                                {this._renderButton('Hire', () => this.setState({ visibleModal: 1 }))}
+                        <View style={{flex: 1,justifyContent: 'center'}}>
+                                {this._renderButton('H i r e', () => this.setState({ visibleModal: 1 }))}
                                 <Modal isVisible={this.state.visibleModal === 1}>
                                     {this._renderModalContent()}
                                 </Modal>
-
                             </View>
                             {users.map(user =>
                                 <View key={user.id} style={styles.mainbody}>
-                                    <Image style={styles.imgprofile} source={require("./pr.jpg")} />
+                                    <Image style={{marginLeft: 100,height: 120,width: 120,borderRadius:100,borderColor:'#6698AD',borderWidth:2}} source={require("./profile.png")} />
                                     <Text style={styles.name}>{user.name}</Text>
                                     <Text style={styles.email}>{user.email}</Text>
-                                    <View style={styles.itemprofile}>
-                                        <Image style={styles.imgitem} source={require("./star.png")} />
-                                        <Text style={styles.labelitem}>{user.skill}</Text>
-                                        <Text style={styles.sublabelitem}>Skill</Text>
-                                    </View>
-                                    <View style={styles.itemprofile}>
-                                        <Image style={styles.imgitem} source={require("./star.png")} />
-                                        <Text style={styles.labelitem}>{user.showcase}</Text>
-                                        <Text style={styles.sublabelitem}>Showcase</Text>
-                                    </View>
-                                    <View style={styles.itemprofile}>
-                                        <Image style={styles.imgitem} source={require("./star.png")} />
-                                        <Text style={styles.labelitem}>{user.location}</Text>
-                                        <Text style={styles.sublabelitem}>Location</Text>
-                                    </View>
-                                    <View style={styles.itemprofile}>
-                                        <Image style={styles.imgitem} source={require("./star.png")} />
-                                        <Text style={styles.labelitem}>{user.description}</Text>
-                                        <Text style={styles.sublabelitem}>Description</Text>
+                                    <View style={{backgroundColor:'#6698AD',borderRadius:15}}>
+                                        <Card flexDirection="row" style={{elevation:0,borderColor:'#6698AD',marginLeft:20, backgroundColor:'transparent',borderRadius:10,width:280}}>
+                                            <Text style={{marginLeft:7,fontSize:20}}>Skill: </Text>
+                                            <Text style={{fontSize:17}}> {user.skill}</Text>
+                                        </Card>
+                                        <Card flexDirection="row" style={{elevation:0,borderColor:'#6698AD',marginLeft:20, backgroundColor:'transparent',borderRadius:10,width:280}}>
+                                            <Text style={{marginLeft:7,fontSize:20}}>Showcase: </Text>
+                                            <Text style={{fontSize:17}}> {user.showcase}</Text>
+                                        </Card>
+                                        <Card flexDirection="row" style={{elevation:0,borderColor:'#6698AD',marginLeft:20, backgroundColor:'transparent',borderRadius:10,width:280}}>
+                                            <Text style={{marginLeft:7,fontSize:20}}>Address: </Text>
+                                            <Text style={{fontSize:17}}> {user.location}</Text>
+                                        </Card>
+                                        <Card style={{elevation:0,borderColor:'#6698AD',marginLeft:20, backgroundColor:'transparent',borderRadius:10,width:280}}>
+                                            <Text style={{marginLeft:7,fontSize:20}}>Description: </Text>
+                                            <Text style={{fontSize:17,marginLeft:30,marginRight:10}}> {user.description}</Text>
+                                        </Card>
                                     </View>
                                 </View>
 
                             )}
                         </ScrollView>
-                    </ImageBackground>
-
-
-                    {/* </Content> */}
+                        </Container>
                 </Container>
-
-
-
-
-
-
-
-
-
-
             )
     }
 }
 const styles = StyleSheet.create({
     mainbody: {
-        marginTop: 30,
         marginLeft: 24,
         marginRight: 24,
         marginBottom: 70,
-    },
-    imgprofile: {
-        marginTop: 10,
-        marginLeft: 100,
-        height: 120,
-        width: 120
     },
     imgitem: {
         height: 30,
@@ -278,18 +246,13 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: "blue"
     },
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
     button: {
-        backgroundColor: 'lightblue',
+        backgroundColor: '#6698AD',
         padding: 12,
-        margin: 16,
+        margin: 8,
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 4,
+        borderRadius: 15,
         borderColor: 'rgba(0, 0, 0, 0.1)',
     },
     modalContent: {

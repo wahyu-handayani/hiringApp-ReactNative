@@ -39,7 +39,7 @@ export default class Project extends Component {
             }
         }
         axios
-            .post('http://192.168.43.132:8000/companyproject', {
+            .post('http://192.168.6.195:8000/companyproject', {
                 id_project: this.state.id_project,
                 project_name: this.state.project_name,
                 description: this.state.description,
@@ -58,19 +58,32 @@ export default class Project extends Component {
     render() {
         return (
             <View>
-                <Header style={{ backgroundColor: 'blue', width: 360, height: 50, marginBottom: 20 }}>
-                    <Left>
-                        <Button transparent onPress={() => { this.logout() }}>
-                            <Icon name='close' style={{ color: 'white' }} />
-                        </Button>
-                    </Left>
-                    <Body>
-                        <Title >Add Project</Title>
-                    </Body>
-                    <Right />
-
-                </Header>
-                <Item regular style={{width: 335,height: 50,borderColor: "white",backgroundColor: "cadetblue",borderRadius: 8,marginLeft: 12,marginTop: 5, marginBottom:10}}>
+                <Header style={{ backgroundColor: 'lightslategrey' }}>
+                        <Left>
+                            <Button transparent onPress={async () => {
+                                await AsyncStorage.removeItem('emailEng')
+                                this.props.navigation.navigate('Company')
+                            }}>
+                                <Icon name='ios-arrow-back' />
+                            </Button>
+                        </Left>
+                        <Body>
+                            <Title>Add Project</Title>
+                        </Body>
+                        
+                        <Right>
+                            <Button transparent onPress={async () => {
+                                await AsyncStorage.removeItem('email')
+                                await AsyncStorage.removeItem('usertoken')
+                                await AsyncStorage.removeItem('emailEng')
+                                await AsyncStorage.removeItem('position')
+                                this.props.navigation.navigate('Login')
+                            }}>
+                                <Icon name='close' />
+                            </Button>
+                        </Right>
+                    </Header>
+                <Item regular style={{width: 335,height: 50,borderColor: "white",backgroundColor: "#6698AD",borderRadius: 8,marginLeft: 12,marginTop: 15, marginBottom:10}}>
                     <Input
                     autoCapitalize="none"
                     placeholder='ID Project'
@@ -78,7 +91,7 @@ export default class Project extends Component {
                     onChangeText={val => this.onChangeText('id_project', val)}
                     />
                 </Item>
-                <Item regular style={{width: 335,height: 50,borderColor: "white",backgroundColor: "cadetblue",borderRadius: 8,marginLeft: 12,marginTop: 5, marginBottom:10}}>
+                <Item regular style={{width: 335,height: 50,borderColor: "white",backgroundColor: "#6698AD",borderRadius: 8,marginLeft: 12,marginTop: 5, marginBottom:10}}>
                     <Input
                     autoCapitalize="none"
                     placeholder='Project Name'
@@ -86,7 +99,7 @@ export default class Project extends Component {
                     onChangeText={val => this.onChangeText('project_name', val)}
                     />
                 </Item>
-                <Item regular style={{width: 335,height: 50,borderColor: "white",backgroundColor: "cadetblue",borderRadius: 8,marginLeft: 12,marginTop: 5, marginBottom:10}}>
+                <Item regular style={{width: 335,height: 50,borderColor: "white",backgroundColor: "#6698AD",borderRadius: 8,marginLeft: 12,marginTop: 5, marginBottom:10}}>
                     <Input
                     autoCapitalize="none"
                     placeholder='Descrition'
@@ -96,7 +109,7 @@ export default class Project extends Component {
                 </Item>
                 <Button
                     onPress={this.onSubmit}
-                    style={{ width: 335,height: 50,borderColor: "white",backgroundColor: "red",borderRadius: 8,marginLeft: 12,marginTop: 5, marginBottom:10}}>
+                    style={{ width: 335,height: 50,borderColor: "white",backgroundColor: "lightslategrey",borderRadius: 8,marginLeft: 12,marginTop: 5, marginBottom:10}}>
                     <Text style={{ fontSize: 15, marginLeft: 150 }}>Save</Text>
                 </Button>
                    
